@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../resources/img/linkfox.ico">
 
-    <title>LinkFox - SEO service</title>
+    <title>SEO pays - SEO service</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
