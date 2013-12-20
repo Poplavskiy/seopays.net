@@ -32,14 +32,6 @@ public class ContactController {
         return "contact";
     }
 
-    @RequestMapping("/")
-    public String home(ModelMap model) {
-//        return "redirect:/index";
-
-        model.addAttribute("company", "SEO pays");
-        return "hello";
-    }
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addContact(@ModelAttribute("contact") Contact contact,
                              BindingResult result) {
