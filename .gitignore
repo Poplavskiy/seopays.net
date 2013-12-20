@@ -1,3 +1,4 @@
 .idea
 seopays.net.iml
 target/
+src/main/webapp/WEB-INF/jdbc.properties
