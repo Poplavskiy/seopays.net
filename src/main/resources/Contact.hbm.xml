@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="seopays.domain">
+	<class name="Contact" table="CONTACTS">
+		<id name="id">
+            <generator class="native" />
+		</id>
+
+		<property name="firstname" column="firstname" type="string" length="30"></property>
+        <property name="lastname" column="lastname" type="string" length="30"></property>
+        <property name="telephone" column="telephone" type="string" length="15"></property>
+        <property name="email" column="email" type="string" length="30"></property>
+        <property name="created" column="created" type="timestamp"></property>
+	</class>
+</hibernate-mapping>
