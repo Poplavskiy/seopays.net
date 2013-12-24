@@ -25,3 +25,5 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     </authentication-manager>
 
 </beans:beans>
+
+<!--TODO set setting for md5 of users passwords-->
