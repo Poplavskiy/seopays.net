@@ -19,11 +19,9 @@ public class Authorities {
     @Column(name = "authority")
     private String authority;
 
-/*
     @ManyToOne
     @JoinColumn(name="username")
     private User user;
-*/
 
 
     public Integer getId() {
@@ -50,7 +48,6 @@ public class Authorities {
         this.authority = authority;
     }
 
-/*
     public User getUser() {
         return user;
     }
@@ -58,5 +55,4 @@ public class Authorities {
     public void setUser(User user) {
         this.user = user;
     }
-*/
 }

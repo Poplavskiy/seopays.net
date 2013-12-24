@@ -2,6 +2,7 @@
 package seopays.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -20,11 +21,7 @@ public class User {
     @Column(name = "enabled")
     private Boolean enabled;
 
-/*
-    @OneToMany(mappedBy="user")
-    private Set<Authorities> authorities;
-*/
-
+    private Set<Authorities> authorities = new HashSet<Authorities>(0);
 
     public String getUsername() {
         return username;
@@ -50,11 +47,12 @@ public class User {
         this.enabled = enabled;
     }
 
-/*    public Set<Authorities> getAuthorities() {
+    @OneToMany(mappedBy="user")
+    public Set<Authorities> getAuthorities() {
         return authorities;
     }
 
     public void setAuthorities(Set<Authorities> authorities) {
         this.authorities = authorities;
-    }*/
+    }
 }

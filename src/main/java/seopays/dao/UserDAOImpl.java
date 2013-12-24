@@ -1,8 +1,10 @@
 package seopays.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import seopays.domain.Authorities;
 import seopays.domain.User;
 
 @Repository
@@ -14,7 +16,26 @@ public class UserDAOImpl implements UserDAO {
 
 
     public void addUser(User user) {
-        sessionFactory.getCurrentSession().save(user);
+
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+
+        Authorities au = new Authorities();
+
+        au.setAuthority("ROLE_USER");
+        au.setUsername(user.getUsername());
+        au.setUser(user);
+
+        user.getAuthorities().add(au);
+
+        session.save(user);
+
+        session.save(au);
+
+
+
+        session.getTransaction().commit();
     }
 
 

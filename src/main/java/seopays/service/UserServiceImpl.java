@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import seopays.dao.UserDAO;
+import seopays.domain.Authorities;
 import seopays.domain.User;
+
 
 @Service
 public class UserServiceImpl implements UserService {
