@@ -13,7 +13,7 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-
+    // TODO Add validation for addUser and removeUser
 
     public void addUser(User user) {
 
@@ -30,10 +30,7 @@ public class UserDAOImpl implements UserDAO {
         user.getAuthorities().add(au);
 
         session.save(user);
-
         session.save(au);
-
-
 
         session.getTransaction().commit();
     }

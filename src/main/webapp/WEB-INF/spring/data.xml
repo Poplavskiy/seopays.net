@@ -30,9 +30,9 @@
         </property>
         <property name="mappingResources">
            <list>
-               <value>User.hbm.xml</value>
-               <value>Authorities.hbm.xml</value>
-               <value>Contact.hbm.xml</value>
+               <value>hibernate/User.hbm.xml</value>
+               <value>hibernate/Authorities.hbm.xml</value>
+               <value>hibernate/Contact.hbm.xml</value>
            </list>
         </property>
         <property name="hibernateProperties">
@@ -40,6 +40,7 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>

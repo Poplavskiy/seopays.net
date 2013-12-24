@@ -46,5 +46,7 @@
 </form:form>
 
 
+ <%--TODO Add captcha --%>
+
 </body>
 </html>
