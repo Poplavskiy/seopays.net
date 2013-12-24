@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.security.Timestamp;
 
 @Entity
 @Table(name = "CONTACTS")
@@ -26,6 +27,9 @@ public class Contact {
 
     @Column(name = "TELEPHONE")
     private String telephone;
+
+    @Column(name = "CREATED")
+    private Timestamp created;
 
     public String getFirstname() {
         return firstname;
@@ -65,5 +69,13 @@ public class Contact {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 }

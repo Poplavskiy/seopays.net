@@ -21,32 +21,26 @@
 
     <table>
         <tr>
-            <td><form:label path="firstname">
-                <spring:message code="label.firstname" />
+            <td><form:label path="username">
+                <spring:message code="label.login" />
             </form:label></td>
-            <td><form:input path="firstname" /></td>
+            <td><form:input path="username" /></td>
         </tr>
         <tr>
-            <td><form:label path="lastname">
-                <spring:message code="label.lastname" />
+            <td><form:label path="password">
+                <spring:message code="label.password" />
             </form:label></td>
-            <td><form:input path="lastname" /></td>
+            <td><form:input path="password" /></td>
         </tr>
         <tr>
-            <td><form:label path="email">
+            <td><form:label path="enabled">
                 <spring:message code="label.email" />
             </form:label></td>
-            <td><form:input path="email" /></td>
-        </tr>
-        <tr>
-            <td><form:label path="telephone">
-                <spring:message code="label.telephone" />
-            </form:label></td>
-            <td><form:input path="telephone" /></td>
+            <td><form:input path="enabled" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit"
-                                   value="<spring:message code="label.addcontact"/>" /></td>
+                                   value="<spring:message code="label.adduser"/>" /></td>
         </tr>
     </table>
 </form:form>

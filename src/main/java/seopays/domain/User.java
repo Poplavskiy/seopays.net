@@ -20,8 +20,10 @@ public class User {
     @Column(name = "enabled")
     private Boolean enabled;
 
+/*
     @OneToMany(mappedBy="user")
     private Set<Authorities> authorities;
+*/
 
 
     public String getUsername() {
@@ -48,11 +50,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<Authorities> getAuthorities() {
+/*    public Set<Authorities> getAuthorities() {
         return authorities;
     }
 
     public void setAuthorities(Set<Authorities> authorities) {
         this.authorities = authorities;
-    }
+    }*/
 }
