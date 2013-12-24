@@ -18,19 +18,28 @@
     <!--  Непосредственно бин dataSource  -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}"/>
     <!--  Настройки фабрики сессий Хибернейта  -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation">
-            <value>classpath:hibernate.cfg.xml</value>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <!-- TODO init by packed -->
+            <list>
+               <value>seopays.domain.User</value>
+               <value>seopays.domain.Authorities</value>
+           </list>
         </property>
-        <property name="configurationClass">
-            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        <property name="mappingResources">
+           <list>
+               <value>hibernate/User.hbm.xml</value>
+               <value>hibernate/Authorities.hbm.xml</value>
+           </list>
         </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
