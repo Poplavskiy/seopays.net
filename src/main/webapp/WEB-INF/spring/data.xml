@@ -49,7 +49,4 @@
             </props>
         </property>
     </bean>
-
-<!-- TODO run init sql in proper way -->
-
 </beans>
