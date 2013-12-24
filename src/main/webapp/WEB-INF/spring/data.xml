@@ -22,17 +22,16 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
-           <list>
+            <!-- TODO init by packed -->
+            <list>
                <value>seopays.domain.User</value>
                <value>seopays.domain.Authorities</value>
-               <value>seopays.domain.Contact</value>
            </list>
         </property>
         <property name="mappingResources">
            <list>
                <value>hibernate/User.hbm.xml</value>
                <value>hibernate/Authorities.hbm.xml</value>
-               <value>hibernate/Contact.hbm.xml</value>
            </list>
         </property>
         <property name="hibernateProperties">

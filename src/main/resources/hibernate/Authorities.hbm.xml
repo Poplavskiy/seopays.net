@@ -12,3 +12,5 @@
 		<property name="authority" column="authority" type="string" length="50"></property>
 	</class>
 </hibernate-mapping>
+
+<!-- TODO add constrain to users-->
