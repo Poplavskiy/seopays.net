@@ -254,22 +254,20 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Login form</h4>
             </div>
-            <div class="modal-body">
-
-                <form class="form-signin" role="form">
+            <form class="form-signin" role="form">
+                <div class="modal-body">
                     <h2 class="form-signin-heading">Please sign in</h2>
                     <input type="text" class="form-control" placeholder="Email address" required autofocus>
                     <input type="password" class="form-control" placeholder="Password" required>
                     <label class="checkbox">
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Sign in</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
