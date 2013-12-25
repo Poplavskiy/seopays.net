@@ -37,6 +37,9 @@ public class AccountController {
 
             if(userService.addUser(user)) // check is existed account?
                 return new ResponseEntity<String>("ok", HttpStatus.OK);
+
+                // TODO Send email for conformation.
+
             else
                 return new ResponseEntity<String>("error", HttpStatus.OK);
         }
