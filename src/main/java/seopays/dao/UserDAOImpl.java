@@ -4,6 +4,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import seopays.domain.Authorities;
 import seopays.domain.User;
@@ -16,6 +18,8 @@ public class UserDAOImpl implements UserDAO {
 
     // TODO Add validation for removeUser
 
+    private PasswordEncoder encoder = new Md5PasswordEncoder();
+
     public boolean addUser(User user) {
 
         Session session = sessionFactory.openSession();
@@ -24,7 +28,15 @@ public class UserDAOImpl implements UserDAO {
 
         try {
 
+            String username = user.getUsername();
+            String password = user.getPassword();
+
+
             transaction = session.beginTransaction();
+
+
+            user.setPassword(encoder.encodePassword(password, username));
+
 
             Authorities au = new Authorities();
 

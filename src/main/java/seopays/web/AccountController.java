@@ -29,14 +29,12 @@ public class AccountController {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
 
-        // TODO добавить проверку на существующий аккаунт
-
         if (result.hasErrors()) {
             return new ResponseEntity<String>("error", HttpStatus.OK);
         }
         else {
 
-            if(userService.addUser(user))
+            if(userService.addUser(user)) // check is existed account?
                 return new ResponseEntity<String>("ok", HttpStatus.OK);
             else
                 return new ResponseEntity<String>("error", HttpStatus.OK);

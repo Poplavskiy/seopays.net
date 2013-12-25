@@ -312,8 +312,7 @@
 
         $.post("/register", {
             username: $('#registrationModalId input[name="email"]').val(),
-            password: $('#registrationModalId input[name="password"]').val(),
-            enabled: 1
+            password: $('#registrationModalId input[name="password"]').val()
         })
         .done(function( data ) {
             alert( "Data Loaded: " + data );
