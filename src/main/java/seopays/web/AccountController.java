@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,4 +41,13 @@ public class AccountController {
                 return new ResponseEntity<String>("error", HttpStatus.OK);
         }
     }
+
+
+    @RequestMapping(value = "/profile",method = RequestMethod.GET)
+    public String printWelcome(ModelMap model) {
+        model.addAttribute("company", "SEO pays");
+        return "hello";
+    }
+
+
 }

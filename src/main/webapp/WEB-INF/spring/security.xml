@@ -7,14 +7,18 @@ http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http access-denied-page="/error403.jsp">
+<!--
         <intercept-url pattern="/index*" access="ROLE_USER,ROLE_ANONYMOUS" />
         <intercept-url pattern="/add*" access="ROLE_USER" />
         <intercept-url pattern="/delete/*" access="ROLE_ADMIN" />
+-->
+        <intercept-url pattern="/profile*" access="ROLE_USER" />
+
         <form-login login-page="/login.jsp" default-target-url="/index"
                     authentication-failure-url="/login.jsp?error=true" />
         <logout logout-url="/logout" logout-success-url="/index" />
 
-        <anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
+        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />-->
         <remember-me />
     </http>
 
@@ -28,5 +32,3 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     </authentication-manager>
 
 </beans:beans>
-
-<!--TODO set setting for md5 of users passwords-->
