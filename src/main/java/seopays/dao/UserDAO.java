@@ -4,7 +4,7 @@ import seopays.domain.User;
 
 public interface UserDAO {
 
-    public void addUser(User user);
+    public boolean addUser(User user);
 
     public void editUser(String username, User user);
 

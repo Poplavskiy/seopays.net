@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
 
@@ -25,12 +26,20 @@ public class AccountController {
     public HttpEntity<String> addContact(@ModelAttribute("user") User user,
                              BindingResult result) {
 
-        userService.addUser(user);
+        UserValidator userValidator = new UserValidator();
+        userValidator.validate(user, result);
 
-        return new ResponseEntity<String>("ok", HttpStatus.OK);
+        // TODO добавить проверку на существующий аккаунт
+
+        if (result.hasErrors()) {
+            return new ResponseEntity<String>("error", HttpStatus.OK);
+        }
+        else {
+
+            if(userService.addUser(user))
+                return new ResponseEntity<String>("ok", HttpStatus.OK);
+            else
+                return new ResponseEntity<String>("error", HttpStatus.OK);
+        }
     }
-
-
-
-
 }

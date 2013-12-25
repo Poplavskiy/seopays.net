@@ -1,6 +1,7 @@
 package seopays.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,26 +14,44 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    // TODO Add validation for addUser and removeUser
+    // TODO Add validation for removeUser
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
 
         Session session = sessionFactory.openSession();
 
-        session.beginTransaction();
+        Transaction transaction = null;
 
-        Authorities au = new Authorities();
+        try {
 
-        au.setAuthority("ROLE_USER");
-        au.setUsername(user.getUsername());
-        au.setUser(user);
+            transaction = session.beginTransaction();
 
-        user.getAuthorities().add(au);
+            Authorities au = new Authorities();
 
-        session.save(user);
-        session.save(au);
+            au.setAuthority("ROLE_USER");
+            au.setUsername(user.getUsername());
+            au.setUser(user);
 
-        session.getTransaction().commit();
+            user.getAuthorities().add(au);
+
+            session.save(user);
+            session.save(au);
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+
+                return false;
+            }
+        }  finally {
+
+            session.close();
+        }
+
+        return true;
     }
 
 
