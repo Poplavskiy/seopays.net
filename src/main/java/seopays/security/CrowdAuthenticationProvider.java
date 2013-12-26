@@ -7,11 +7,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import seopays.util.CaptchaCaptureFilter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrowdAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    private CaptchaCaptureFilter captchaCaptureFilter;
 
 
 
@@ -25,6 +30,9 @@ public class CrowdAuthenticationProvider implements AuthenticationProvider {
 
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
+
+        String response = captchaCaptureFilter.getUserCaptchaResponse();
+
         if (name.equals("admin") && password.equals("system")) {
             List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));

@@ -20,7 +20,11 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
         <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />-->
         <!--<remember-me />-->
+
+        <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
     </http>
+
+    <beans:bean id="captchaCaptureFilter" class="seopays.util.CaptchaCaptureFilter" />
 
     <beans:bean id='crowdAuthenticationProvider' class='seopays.security.CrowdAuthenticationProvider'/>
 
