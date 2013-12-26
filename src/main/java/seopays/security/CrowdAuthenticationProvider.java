@@ -19,6 +19,8 @@ public class CrowdAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private CaptchaCaptureFilter captchaCaptureFilter;
+
+    @Autowired
     private UserService userService;
 
     @Override
