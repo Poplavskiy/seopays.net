@@ -10,5 +10,6 @@ public interface UserDAO {
 
     public void removeUser(String username);
 
+    public boolean login(String username, String password);
 
 }
