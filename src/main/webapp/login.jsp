@@ -33,6 +33,13 @@
             <td><input type="checkbox" name="_spring_security_remember_me" /></td>
         </tr>
         <tr>
+            <td align="center" colspan="2"><img alt="captcha image" src="captcha" /></td>
+        </tr>
+        <tr>
+            <td align="right">Code:</td>
+            <td><td><input type="text" name="j_captcha" /></td>
+        </tr>
+        <tr>
             <td colspan="2" align="right"><input type="submit" value="Login" />
                 <input type="reset" value="Reset" /></td>
         </tr>

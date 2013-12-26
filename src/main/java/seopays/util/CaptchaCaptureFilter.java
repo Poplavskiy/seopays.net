@@ -26,13 +26,10 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest req, HttpServletResponse res,
                                  FilterChain chain) throws IOException, ServletException {
 
-        logger.debug("Captcha capture filter");
+        if (req.getParameter("j_captcha") != null) {
+            request = req;
+            userCaptchaResponse = req.getParameter("j_captcha");
 
-        // Assign values only when user has submitted a Captcha value.
-        // Without this condition the values will be reset due to redirection
-        // and CaptchaVerifierFilter will enter an infinite loop
-
-        if(req != null) {
             HttpSession session = req.getSession();
 
             String val = getToken(session);
@@ -41,14 +38,6 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
             }
         }
 
-        if (req.getParameter("captchaToken") != null) {
-            request = req;
-            userCaptchaResponse = req.getParameter("captchaToken");
-        }
-
-        logger.debug("userResponse: " + userCaptchaResponse);
-
-        // Proceed with the remaining filters
         chain.doFilter(req, res);
     }
 
