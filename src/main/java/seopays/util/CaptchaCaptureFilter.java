@@ -13,7 +13,8 @@ import java.io.IOException;
 public class CaptchaCaptureFilter extends OncePerRequestFilter {
 
     private String userCaptchaResponse;
-    private HttpServletRequest request;
+    private String userCaptchaCode;
+
 
     public static String getToken(HttpSession session) {
         Object val = session.getAttribute("captchaToken");
@@ -27,33 +28,20 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
                                  FilterChain chain) throws IOException, ServletException {
 
         if (req.getParameter("j_captcha") != null) {
-            request = req;
+
             userCaptchaResponse = req.getParameter("j_captcha");
 
             HttpSession session = req.getSession();
 
-            String val = getToken(session);
-            if(val != null) {
-                String var = val;
-            }
+            userCaptchaCode = getToken(session);
         }
 
         chain.doFilter(req, res);
     }
 
-    public String getUserCaptchaResponse() {
-        return userCaptchaResponse;
-    }
 
-    public void setUserCaptchaResponse(String userCaptchaResponse) {
-        this.userCaptchaResponse = userCaptchaResponse;
-    }
+    public boolean isRightCaptcha() {
 
-    public HttpServletRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
+        return userCaptchaCode.equals(userCaptchaResponse);
     }
 }

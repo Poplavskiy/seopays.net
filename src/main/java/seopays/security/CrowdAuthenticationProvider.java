@@ -34,9 +34,9 @@ public class CrowdAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        String response = captchaCaptureFilter.getUserCaptchaResponse();
+        if (userService.login(username, password) &&
+            captchaCaptureFilter.isRightCaptcha()) {
 
-        if (userService.login(username, password)) {
             List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
             Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
