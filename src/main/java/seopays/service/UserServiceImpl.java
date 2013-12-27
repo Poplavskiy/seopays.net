@@ -34,4 +34,11 @@ public class UserServiceImpl implements UserService {
         userDAO.removeUser(username);
 
     }
+
+    @Transactional
+    public boolean login(String username, String password) {
+
+        return userDAO.login(username, password);
+    }
+
 }

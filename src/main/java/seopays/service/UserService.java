@@ -9,4 +9,7 @@ public interface UserService {
     public void editUser(String username, User user);
 
     public void removeUser(String username);
+
+    public boolean login(String username, String password);
+
 }

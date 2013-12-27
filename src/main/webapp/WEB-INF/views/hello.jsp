@@ -254,6 +254,9 @@
                     <input type="text" class="form-control" placeholder="Email address" name="email" required autofocus>
                     <input type="password" class="form-control" placeholder="Password" name="password" required>
                     <input type="password" class="form-control" placeholder="RePassword" name="RePassword"  required>
+
+                    <img alt="captcha image" src="captcha" />
+
                     <input type="text" class="form-control" placeholder="Code" name="code" required>
                 </div>
                 <div class="modal-footer">

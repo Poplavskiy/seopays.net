@@ -83,4 +83,14 @@ public class UserDAOImpl implements UserDAO {
             sessionFactory.getCurrentSession().delete(user);
         }
     }
+
+
+    public boolean login(String username, String password) {
+
+        User user = (User) sessionFactory.getCurrentSession().load(
+                User.class, username);
+
+        return null != user;
+    }
+
 }
