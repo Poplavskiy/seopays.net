@@ -1,6 +1,5 @@
 package seopays.util;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -10,9 +9,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
 
-import java.io.IOException;
 import java.util.Properties;
 
 @Component
