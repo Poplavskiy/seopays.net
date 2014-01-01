@@ -52,8 +52,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript: LoginForm()">Login</a></li>
-                            <li><a href="javascript: RegistrationForm()">Registration</a></li>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/registration">Registration</a></li>
 <%--
                             <li class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
@@ -197,148 +197,11 @@
 
 </div><!-- /.container -->
 
-
-<style type="text/css">
-
-    .form-signin {
-        max-width: 330px;
-        padding: 15px;
-        margin: 0 auto;
-    }
-    .form-signin .form-signin-heading,
-    .form-signin .checkbox {
-        margin-bottom: 10px;
-    }
-    .form-signin .checkbox {
-        font-weight: normal;
-    }
-    .form-signin .form-control {
-        position: relative;
-        font-size: 16px;
-        height: auto;
-        padding: 10px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .form-signin .form-control:focus {
-        z-index: 2;
-    }
-    .form-signin input[type="text"] {
-        margin-bottom: -1px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-</style>
-
-
-
-<div class="modal fade" id="registrationModalId" tabindex="-1"
-     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Registration form</h4>
-            </div>
-            <form class="form-signin" role="form">
-                <div class="modal-body">
-                    <h2 class="form-signin-heading">Please register</h2>
-
-                    <input type="text" class="form-control" placeholder="Email address" name="email" required autofocus>
-                    <input type="password" class="form-control" placeholder="Password" name="password" required>
-                    <input type="password" class="form-control" placeholder="RePassword" name="RePassword"  required>
-
-                    <img alt="captcha image" src="captcha" />
-
-                    <input type="text" class="form-control" placeholder="Code" name="code" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Register</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<div class="modal fade" id="loginModalId" tabindex="-1"
-     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login form</h4>
-            </div>
-            <form class="form-signin" role="form">
-                <div class="modal-body">
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <input type="text" class="form-control" placeholder="Email address" required autofocus>
-                    <input type="password" class="form-control" placeholder="Password" required>
-                    <label class="checkbox">
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="../../resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-    function LoginForm() {
-        $('#loginModalId').modal();
-    }
-
-    function RegistrationForm() {
-        $('#registrationModalId').modal();
-    }
-
-    function sendRegistrationForm() {
-
-        $.post("/register", {
-            username: $('#registrationModalId input[name="email"]').val(),
-            password: $('#registrationModalId input[name="password"]').val()
-        })
-        .done(function( data ) {
-            alert( "Data Loaded: " + data );
-        });
-    }
-
-
-    $(function() {
-
-        $('#registrationModalId .btn-primary').click(function() {
-
-            sendRegistrationForm();
-        });
-
-    });
-
-
-
-
-
-
-</script>
-
 
 
 </body>

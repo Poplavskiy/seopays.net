@@ -14,6 +14,7 @@ import java.util.Map;
 
 @Controller
 public class UserController {
+/*
 
     @Autowired
     private UserService userService;
@@ -39,6 +40,7 @@ public class UserController {
     }
 
 
+*/
 
 
 

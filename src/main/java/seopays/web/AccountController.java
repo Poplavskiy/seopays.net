@@ -27,15 +27,15 @@ public class AccountController {
     private MailSender ms;
 
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public HttpEntity<String> addContact(@ModelAttribute("user") User user,
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String addContact(@ModelAttribute("user") User user,
                              BindingResult result) {
 
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
 
         if (result.hasErrors()) {
-            return new ResponseEntity<String>("error", HttpStatus.OK);
+            return "registration";
         }
         else {
 
@@ -44,13 +44,25 @@ public class AccountController {
 
                 ms.send(user.getUsername(), "Registration", "Hello world!!!");
 
-                return new ResponseEntity<String>("ok", HttpStatus.OK);
+                return "registration";
 
             } else
-                return new ResponseEntity<String>("error", HttpStatus.OK);
+                return "registration";
         }
     }
 
+
+
+
+
+    @RequestMapping(value = "/registration",method = RequestMethod.GET)
+    public String getRegistration(ModelMap model) {
+//        model.addAttribute("company", "SEO pays");
+
+
+
+        return "registration";
+    }
 
 
 
