@@ -29,18 +29,21 @@ public class UserValidator implements Validator {
         String username = user.getUsername();
         String password = user.getPassword();
 
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(username);
+        if(username != null) {
 
-        if(username.isEmpty() || !matcher.matches() ||
-                username.length() > 50) {
+            pattern = Pattern.compile(EMAIL_PATTERN);
+            matcher = pattern.matcher(username);
+
+            if(username.isEmpty() || !matcher.matches() ||
+                    username.length() > 50) {
+                errors.rejectValue("username", "your_error_code");
+            }
+
+            if(password == null || password.isEmpty() || password.length() > 50) {
+                errors.rejectValue("password", "your_error_code");
+            }
+        } else {
             errors.rejectValue("username", "your_error_code");
         }
-
-        if(password.isEmpty() || password.length() > 50) {
-            errors.rejectValue("password", "your_error_code");
-        }
-
-
     }
 }

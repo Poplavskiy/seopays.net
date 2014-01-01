@@ -26,28 +26,35 @@ public class AccountController {
     @Autowired
     private MailSender ms;
 
-    @ResponseBody
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String addContact(@ModelAttribute("user") User user,
-                             BindingResult result) {
+    public User addContact(@ModelAttribute("user") User user, ModelMap model, BindingResult result) {
+
+
 
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
 
         if (result.hasErrors()) {
-            return "registration";
+
+            model.addAttribute("error", true);
+
+
+            return user;
         }
         else {
 
             if(userService.addUser(user)) { // check is existed account?
 
+//                ms.send(user.getUsername(), "Registration", "Hello world!!!");
 
-                ms.send(user.getUsername(), "Registration", "Hello world!!!");
+                return user;
 
-                return "registration";
+            } else {
+                model.addAttribute("error", true);
 
-            } else
-                return "registration";
+                return user;
+            }
+
         }
     }
 

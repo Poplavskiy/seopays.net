@@ -152,7 +152,7 @@
         <div class="content-header reg_border">
             <h2>
                 <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
-                Registration
+                <spring:message code="label.regnewuser"/>
             </h2>
         </div>
         <ol class="breadcrumb reg_border">
@@ -166,16 +166,17 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <c:if test="${not empty param.error}">
-                        <font color="red"> <spring:message code="label.loginerror"/>
-                            : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} </font>
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">
+                        <spring:message code="label.loginerror"/>
+                            : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+                        </div>
                     </c:if>
 
-
-                    <form method="POST" action="<c:url value="/registration" /> role="form">
+                    <form method="POST" action="<c:url value="/registration?" /> role="form">
                         <div class="form-group">
-                            <label for="exampleInputEmail1"><spring:message code="label.email"/></label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<spring:message code="label.enteremail"/>">
+                            <label><spring:message code="label.email"/></label>
+                            <input type="username" class="form-control" placeholder="<spring:message code="label.enteremail"/>">
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.password"/></label>
