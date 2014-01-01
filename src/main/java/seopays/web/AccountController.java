@@ -14,14 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
+import seopays.util.MailSender;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 @Controller
 public class AccountController {
@@ -29,6 +23,8 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MailSender ms;
 
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -45,7 +41,8 @@ public class AccountController {
 
             if(userService.addUser(user)) { // check is existed account?
 
-                sendEmail();
+
+                ms.send(user.getUsername(), "Registration", "Hello world!!!");
 
                 return new ResponseEntity<String>("ok", HttpStatus.OK);
 
@@ -55,46 +52,6 @@ public class AccountController {
     }
 
 
-    protected void sendEmail() {
-
-        final String username = "office@seopays.net";
-        final String password = "";
-
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "seopays.net");
-        props.put("mail.smtp.port", "25");
-
-        props.put("mail.debug", "true");
-        props.put("mail.smtp.ssl.trust", "*");
-
-
-        javax.mail.Session session = javax.mail.Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
-
-        try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("office@seopays.net"));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("vladimir.sidorenko@dune-hd.com"));
-            message.setSubject("Registration new account");
-            message.setText("Hello, User,"
-                    + "\n\n you has been registered in our website seopays.net!");
-
-            Transport.send(message);
-
-            System.out.println("Done");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
 

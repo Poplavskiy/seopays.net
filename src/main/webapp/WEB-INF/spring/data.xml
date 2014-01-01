@@ -17,6 +17,15 @@
         <property name="basename" value="classpath:messages"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+    <!--Настройка почты-->
+    <bean id="mailProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:mail.properties</value>
+            </list>
+        </property>
+    </bean>
     <!--
      Настройки бина dataSource будем хранить в отдельном файле
     -->
