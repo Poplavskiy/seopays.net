@@ -39,7 +39,7 @@ public class AccountController {
     private MailSender ms;
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public User addContact(@ModelAttribute("user") User user, ModelMap model,
+    public String addContact(@ModelAttribute("user") User user, ModelMap model,
                            BindingResult result, HttpServletRequest req) {
 
         Locale locale = LocaleContextHolder.getLocale();
@@ -61,7 +61,7 @@ public class AccountController {
             model.addAttribute("error", regfieldserror);
             model.addAttribute("username", user.getUsername());
 
-            return user;
+            return "registration";
         }
         else {
 
@@ -81,14 +81,19 @@ public class AccountController {
 
                     ms.send(user.getUsername(), "Registration", "Hello world!!!");
 
-                    return user;
+                    String regisration_success = bean.getMessage("label.regisrationsuccess", null, locale);
+                    model.addAttribute("message", regisration_success);
+
+
+
+                    return "registration_success";
 
                 } else {
 
                     model.addAttribute("error", accountalreadyexistserror);
                     model.addAttribute("username", user.getUsername());
 
-                    return user;
+                    return "registration";
                 }
 
             }  else {
@@ -96,7 +101,7 @@ public class AccountController {
                 model.addAttribute("error", captcharror);
                 model.addAttribute("username", user.getUsername());
 
-                return user;
+                return "registration";
             }
         }
     }
