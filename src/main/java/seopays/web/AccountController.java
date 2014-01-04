@@ -1,32 +1,20 @@
 package seopays.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
 import seopays.util.MailSender;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Locale;
-import java.util.Properties;
 
 
 @Controller
@@ -38,11 +26,13 @@ public class AccountController {
     @Autowired
     private MailSender ms;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String addContact(@ModelAttribute("user") User user, ModelMap model,
+    @RequestMapping(value = "/{lang}/registration", method = RequestMethod.POST)
+    public String addContact(@PathVariable(value="lang") String lang, @ModelAttribute("user") User user, ModelMap model,
                            BindingResult result, HttpServletRequest req) {
 
-        Locale locale = LocaleContextHolder.getLocale();
+
+
+        Locale locale = new Locale(lang);
 
         ResourceBundleMessageSource bean = new ResourceBundleMessageSource();
         bean.setBasename("messages");
@@ -112,9 +102,10 @@ public class AccountController {
 
 
 
-    @RequestMapping(value = "/registration",method = RequestMethod.GET)
-    public String getRegistration(ModelMap model) {
-//        model.addAttribute("company", "SEO pays");
+    @RequestMapping(value = "/{lang}/registration",method = RequestMethod.GET)
+    public String getRegistration(@PathVariable(value="lang") String lang) {
+
+        System.out.println(lang);
 
         return "registration";
     }

@@ -50,7 +50,7 @@
                         </div>
                     </c:if>
 
-                    <form method="POST" action="<c:url value="/registration" />" role="form">
+                    <form method="POST" action="<c:url value="/ru/registration"/>" role="form">
                         <div class="form-group">
                             <label><spring:message code="label.email"/></label>
                             <input type="input" name="username" class="form-control" placeholder="<spring:message code="label.enteremail"/>" value="${username}" >
@@ -64,7 +64,7 @@
                             <input type="password" class="form-control" placeholder="<spring:message code="label.replaypassword"/>">
                         </div>
                         <div class="form-group">
-                            <img id="captcha_img_id" alt="captcha image" src="captcha"/>
+                            <img id="captcha_img_id" alt="captcha image" src="/captcha"/>
                             <div style="float: right; padding-right: 10px;height: 70px;line-height: 70px;">
                                 <span class="glyphicon glyphicon-repeat" onclick="refresh_captcha()"></span>
                                 <span class="glyphicon-class">reload</span>
@@ -87,7 +87,7 @@
     function refresh_captcha() {
 
         var d = new Date();
-        $("#captcha_img_id").attr("src", "captcha?"+d.getTime());
+        $("#captcha_img_id").attr("src", "/captcha?"+d.getTime());
     }
 
 
