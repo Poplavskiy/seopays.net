@@ -155,6 +155,7 @@
                 <spring:message code="label.regnewuser"/>
             </h2>
         </div>
+        <%--TODO Create info tab with normal icon--%>
         <ol class="breadcrumb reg_border">
             <li><a href="#">Home</a></li>
             <li><a href="#">Account</a></li>
@@ -165,6 +166,8 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <%--TODO Create js validation: repass and pass, reqiered email, captcha--%>
 
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">
@@ -187,6 +190,7 @@
                         </div>
                         <div class="form-group">
                             <img alt="captcha image" src="captcha"/>
+                            <%--TODO Create refresh button--%>
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.captchacode"/></label>
