@@ -168,19 +168,18 @@
 
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">
-                        <spring:message code="label.loginerror"/>
-                            : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+                        ${error}
                         </div>
                     </c:if>
 
-                    <form method="POST" action="<c:url value="/registration?" /> role="form">
+                    <form method="POST" action="<c:url value="/registration" />" role="form">
                         <div class="form-group">
                             <label><spring:message code="label.email"/></label>
-                            <input type="username" class="form-control" placeholder="<spring:message code="label.enteremail"/>">
+                            <input type="input" name="username" class="form-control" placeholder="<spring:message code="label.enteremail"/>" value="${username}" >
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.password"/></label>
-                            <input type="password" class="form-control"  placeholder="<spring:message code="label.password"/>">
+                            <input type="password" name="password" class="form-control"  placeholder="<spring:message code="label.password"/>">
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.replaypassword"/></label>
@@ -191,7 +190,7 @@
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.captchacode"/></label>
-                            <input type="password" class="form-control" placeholder="<spring:message code="label.captchacode"/>">
+                            <input type="input" name="captcha" class="form-control" placeholder="<spring:message code="label.captchacode"/>">
                         </div>
                         <button type="submit" class="btn btn-default"><spring:message code="label.submit"/></button>
                     </form>
