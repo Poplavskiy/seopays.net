@@ -75,6 +75,8 @@ public class AccountController {
             if(captcha_key.equals(userCaptchaResponse) &&
                 (!captcha_key.isEmpty() && !userCaptchaResponse.isEmpty())) {
 
+                /*TODO Set enabled to false, and restrictions for user role.*/
+
                 if(userService.addUser(user)) { // check is existed account?
 
                     /*TODO Create templates for emails*/
