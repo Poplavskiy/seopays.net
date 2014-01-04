@@ -135,6 +135,7 @@
 
 <div id="wrapper" class="container">
 
+    <%--TODO Create info tab with normal icon--%>
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -155,10 +156,9 @@
                 <spring:message code="label.regnewuser"/>
             </h2>
         </div>
-        <%--TODO Create info tab with normal icon--%>
+        <%--TODO Create auto breadcrumb--%>
         <ol class="breadcrumb reg_border">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Account</a></li>
+            <li><a href="/">Home</a></li>
             <li class="active">Registration</li>
         </ol>
         <!-- Keep all page content within the page-content inset div! -->
@@ -168,7 +168,6 @@
                 <div class="panel-body">
 
                     <%--TODO Create js validation: repass and pass, reqiered email, captcha--%>
-
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger">
                         ${error}
@@ -189,8 +188,11 @@
                             <input type="password" class="form-control" placeholder="<spring:message code="label.replaypassword"/>">
                         </div>
                         <div class="form-group">
-                            <img alt="captcha image" src="captcha"/>
-                            <%--TODO Create refresh button--%>
+                            <img id="captcha_img_id" alt="captcha image" src="captcha"/>
+                            <div style="float: right; padding-right: 10px;height: 70px;line-height: 70px;">
+                                <span class="glyphicon glyphicon-repeat" onclick="refresh_captcha()"></span>
+                                <span class="glyphicon-class">reload</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label><spring:message code="label.captchacode"/></label>
@@ -203,6 +205,17 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    function refresh_captcha() {
+
+        var d = new Date();
+        $("#captcha_img_id").attr("src", "captcha?"+d.getTime());
+    }
+
+
+</script>
 
 <jsp:include page="modules/footer_welcome.jsp"/>
 
