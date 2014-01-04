@@ -77,6 +77,8 @@ public class AccountController {
 
                 if(userService.addUser(user)) { // check is existed account?
 
+                    /*TODO Create templates for emails*/
+
                     ms.send(user.getUsername(), "Registration", "Hello world!!!");
 
                     return user;
