@@ -21,6 +21,8 @@ import seopays.service.UserService;
 import seopays.util.MailSender;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
@@ -38,7 +40,7 @@ public class AccountController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public User addContact(@ModelAttribute("user") User user, ModelMap model,
-                           BindingResult result) {
+                           BindingResult result, HttpServletRequest req) {
 
         Locale locale = LocaleContextHolder.getLocale();
 
@@ -47,6 +49,9 @@ public class AccountController {
         bean.setDefaultEncoding("UTF-8");
         String regfieldserror = bean.getMessage("label.regfieldserror", null, locale);
         String accountalreadyexistserror = bean.getMessage("label.accountalreadyexistserror", null, locale);
+        String captcharror = bean.getMessage("label.captcharror", null, locale);
+
+
 
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
@@ -60,20 +65,37 @@ public class AccountController {
         }
         else {
 
-            if(userService.addUser(user)) { // check is existed account?
+            HttpSession session = req.getSession(false);
+            Object val = session.getAttribute("captchaToken");
 
-                ms.send(user.getUsername(), "Registration", "Hello world!!!");
+            String captcha_key = val != null ? val.toString() : null;
+            String userCaptchaResponse = req.getParameter("captcha");
 
-                return user;
 
-            } else {
+            if(captcha_key.equals(userCaptchaResponse) &&
+                (!captcha_key.isEmpty() && !userCaptchaResponse.isEmpty())) {
 
-                model.addAttribute("error", accountalreadyexistserror);
+                if(userService.addUser(user)) { // check is existed account?
+
+                    ms.send(user.getUsername(), "Registration", "Hello world!!!");
+
+                    return user;
+
+                } else {
+
+                    model.addAttribute("error", accountalreadyexistserror);
+                    model.addAttribute("username", user.getUsername());
+
+                    return user;
+                }
+
+            }  else {
+
+                model.addAttribute("error", captcharror);
                 model.addAttribute("username", user.getUsername());
 
                 return user;
             }
-
         }
     }
 
