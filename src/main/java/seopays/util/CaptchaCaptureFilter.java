@@ -42,7 +42,8 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
 
     public boolean isRightCaptcha() {
 
-        return userCaptchaCode.equals(userCaptchaResponse) &&
+        return (userCaptchaCode != null &&  userCaptchaResponse != null) &&
+                userCaptchaCode.equals(userCaptchaResponse) &&
                 (!userCaptchaCode.isEmpty() && !userCaptchaResponse.isEmpty());
     }
 }

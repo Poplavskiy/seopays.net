@@ -52,7 +52,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/ru/login">Login</a></li>
+                            <li><a href="/login">Login</a></li>
                             <li><a href="/ru/registration">Registration</a></li>
 <%--
                             <li class="divider"></li>

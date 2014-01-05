@@ -111,6 +111,15 @@ public class AccountController {
     }
 
 
+    /*TODO Implement international form*/
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String getLogin() {
+
+        return "login";
+    }
+
+
 
 
     @RequestMapping(value = "/profile",method = RequestMethod.GET)
