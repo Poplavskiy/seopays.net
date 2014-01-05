@@ -11,6 +11,7 @@ import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
 import seopays.util.MailSender;
+import seopays.util.UrlFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,11 +27,11 @@ public class AccountController {
     @Autowired
     private MailSender ms;
 
-    @RequestMapping(value = "/{lang}/registration", method = RequestMethod.POST)
-    public String addContact(@PathVariable(value="lang") String lang, @ModelAttribute("user") User user, ModelMap model,
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String addContact(@ModelAttribute("user") User user, ModelMap model,
                            BindingResult result, HttpServletRequest req) {
 
-
+        final String lang = (String)req.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
 
         Locale locale = new Locale(lang);
 
@@ -102,10 +103,10 @@ public class AccountController {
 
 
 
-    @RequestMapping(value = "/{lang}/registration",method = RequestMethod.GET)
-    public String getRegistration(@PathVariable(value="lang") String lang) {
+    @RequestMapping(value = "/registration",method = RequestMethod.GET)
+    public String getRegistration(HttpServletRequest req) {
 
-        System.out.println(lang);
+        final String lang = (String)req.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
 
         return "registration";
     }

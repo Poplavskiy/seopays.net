@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HelloController {
 
-    @RequestMapping(value={"/{lang}"}, method = RequestMethod.GET)
-    public String printWelcome(@PathVariable String lang, ModelMap model) {
+    @RequestMapping(value={"/"}, method = RequestMethod.GET)
+    public String printWelcome(ModelMap model) {
         model.addAttribute("company", "SEO pays");
 
         return "hello";
