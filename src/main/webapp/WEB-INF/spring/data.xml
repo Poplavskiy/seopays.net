@@ -78,4 +78,11 @@
         </property>
     </bean>
 
+    <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="redirectStrategy" ref="queryStringPropagateRedirectStrategy" />
+        <property name="defaultFailureUrl" value="/login" />
+    </bean>
+
+    <bean id="queryStringPropagateRedirectStrategy" class="seopays.util.QueryStringPropagateRedirectStrategy" />
+
 </beans>

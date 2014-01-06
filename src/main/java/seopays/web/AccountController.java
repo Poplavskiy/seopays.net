@@ -126,7 +126,13 @@ public class AccountController extends LocaleController {
     /*TODO Implement international form*/
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String getLogin() {
+    public String getLogin(ModelMap model,
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
+
+        String lang = getLocaleLang(request);
+        setLocale(request, response);
+        model.addAttribute("lang", lang);
 
         return "login";
     }

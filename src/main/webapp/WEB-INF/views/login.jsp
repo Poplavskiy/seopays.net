@@ -51,7 +51,7 @@
                         </div>
                     </c:if>
 
-                    <form method="POST" action="<c:url value="/j_spring_security_check"/>" role="form">
+                    <form method="POST" action="<c:url value="/${lang}/j_spring_security_check"/>" role="form">
                         <div class="form-group">
                             <label><spring:message code="label.login"/></label>
                             <input type="input" name="j_username" class="form-control" placeholder="<spring:message code="label.login"/>" value="" >
