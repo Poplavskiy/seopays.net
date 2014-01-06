@@ -5,8 +5,11 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
@@ -14,12 +17,13 @@ import seopays.util.MailSender;
 import seopays.util.UrlFilter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
 
 @Controller
-public class AccountController {
+public class AccountController extends LocaleController {
 
     @Autowired
     private UserService userService;
@@ -32,12 +36,12 @@ public class AccountController {
                            BindingResult result, HttpServletRequest req) {
 
         final String lang = (String)req.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
-
         Locale locale = new Locale(lang);
 
         ResourceBundleMessageSource bean = new ResourceBundleMessageSource();
         bean.setBasename("messages");
         bean.setDefaultEncoding("UTF-8");
+
         String regfieldserror = bean.getMessage("label.regfieldserror", null, locale);
         String accountalreadyexistserror = bean.getMessage("label.accountalreadyexistserror", null, locale);
         String captcharror = bean.getMessage("label.captcharror", null, locale);
@@ -100,13 +104,10 @@ public class AccountController {
     }
 
 
-
-
-
     @RequestMapping(value = "/registration",method = RequestMethod.GET)
-    public String getRegistration(HttpServletRequest req) {
+    public String getRegistration(HttpServletRequest request, HttpServletResponse response) {
 
-        final String lang = (String)req.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
+        setLocale(request, response);
 
         return "registration";
     }

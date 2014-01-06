@@ -1,9 +1,16 @@
 package seopays.util;
 
 
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +27,8 @@ public class UrlFilter implements Filter {
             throws IOException, ServletException {
 
         final HttpServletRequest request = (HttpServletRequest)servletRequest;
+        /*final HttpServletResponse response = (HttpServletResponse)servletResponse;*/
+
         final String url = request.getRequestURI().substring(request.getContextPath().length());
         final Matcher matcher = localePattern.matcher(url);
         if (matcher.matches()) {
@@ -29,6 +38,14 @@ public class UrlFilter implements Filter {
                     matcher.group(2)).forward(servletRequest, servletResponse);
         }
         else filterChain.doFilter(servletRequest, servletResponse);
+
+/*
+        String lang = (String)request.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
+        if(lang == null) lang = "en";
+
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        localeResolver.setLocale(request, response, StringUtils.parseLocaleString(lang));
+*/
 
     }
 
