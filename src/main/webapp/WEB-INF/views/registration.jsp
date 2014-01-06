@@ -50,7 +50,7 @@
                         </div>
                     </c:if>
 
-                    <form method="POST" action="<c:url value="/ru/registration"/>" role="form">
+                    <form method="POST" action="<c:url value="/${lang}/registration"/>" role="form">
                         <div class="form-group">
                             <label><spring:message code="label.email"/></label>
                             <input type="input" name="username" class="form-control" placeholder="<spring:message code="label.enteremail"/>" value="${username}" >

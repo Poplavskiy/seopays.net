@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import seopays.constraints.UserValidator;
 import seopays.domain.User;
@@ -33,10 +34,13 @@ public class AccountController extends LocaleController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String addContact(@ModelAttribute("user") User user, ModelMap model,
-                           BindingResult result, HttpServletRequest req) {
+                           BindingResult result, HttpServletRequest req,
+                           HttpServletResponse resp) {
 
-        final String lang = (String)req.getAttribute(UrlFilter.LANGUAGE_CODE_ATTRIBUTE_NAME);
+        String lang = getLocaleLang(req);
         Locale locale = new Locale(lang);
+
+        setLocale(req, resp);
 
         ResourceBundleMessageSource bean = new ResourceBundleMessageSource();
         bean.setBasename("messages");
@@ -46,7 +50,7 @@ public class AccountController extends LocaleController {
         String accountalreadyexistserror = bean.getMessage("label.accountalreadyexistserror", null, locale);
         String captcharror = bean.getMessage("label.captcharror", null, locale);
 
-
+        model.addAttribute("lang", lang);
 
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
@@ -105,9 +109,15 @@ public class AccountController extends LocaleController {
 
 
     @RequestMapping(value = "/registration",method = RequestMethod.GET)
-    public String getRegistration(HttpServletRequest request, HttpServletResponse response) {
+    public String getRegistration(ModelMap model,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+
+        String lang = getLocaleLang(request);
 
         setLocale(request, response);
+
+        model.addAttribute("lang", lang);
 
         return "registration";
     }
