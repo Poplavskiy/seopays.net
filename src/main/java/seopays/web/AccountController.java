@@ -5,20 +5,26 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import seopays.constraints.UserValidator;
 import seopays.domain.User;
 import seopays.service.UserService;
 import seopays.util.MailSender;
+import seopays.util.UrlFilter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
 
 @Controller
-public class AccountController {
+public class AccountController extends LocaleController {
 
     @Autowired
     private UserService userService;
@@ -26,22 +32,25 @@ public class AccountController {
     @Autowired
     private MailSender ms;
 
-    @RequestMapping(value = "/{lang}/registration", method = RequestMethod.POST)
-    public String addContact(@PathVariable(value="lang") String lang, @ModelAttribute("user") User user, ModelMap model,
-                           BindingResult result, HttpServletRequest req) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String addContact(@ModelAttribute("user") User user, ModelMap model,
+                           BindingResult result, HttpServletRequest req,
+                           HttpServletResponse resp) {
 
-
-
+        String lang = getLocaleLang(req);
         Locale locale = new Locale(lang);
+
+        setLocale(req, resp);
 
         ResourceBundleMessageSource bean = new ResourceBundleMessageSource();
         bean.setBasename("messages");
         bean.setDefaultEncoding("UTF-8");
+
         String regfieldserror = bean.getMessage("label.regfieldserror", null, locale);
         String accountalreadyexistserror = bean.getMessage("label.accountalreadyexistserror", null, locale);
         String captcharror = bean.getMessage("label.captcharror", null, locale);
 
-
+        model.addAttribute("lang", lang);
 
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, result);
@@ -99,13 +108,16 @@ public class AccountController {
     }
 
 
+    @RequestMapping(value = "/registration",method = RequestMethod.GET)
+    public String getRegistration(ModelMap model,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
 
+        String lang = getLocaleLang(request);
 
+        setLocale(request, response);
 
-    @RequestMapping(value = "/{lang}/registration",method = RequestMethod.GET)
-    public String getRegistration(@PathVariable(value="lang") String lang) {
-
-        System.out.println(lang);
+        model.addAttribute("lang", lang);
 
         return "registration";
     }
@@ -114,7 +126,13 @@ public class AccountController {
     /*TODO Implement international form*/
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String getLogin() {
+    public String getLogin(ModelMap model,
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
+
+        String lang = getLocaleLang(request);
+        setLocale(request, response);
+        model.addAttribute("lang", lang);
 
         return "login";
     }

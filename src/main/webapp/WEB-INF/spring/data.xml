@@ -58,4 +58,31 @@
             </props>
         </property>
     </bean>
+
+    <!--Настройки интернационализации-->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+    <bean id="localeChangeInterceptor"
+          class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="language" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="redirectStrategy" ref="queryStringPropagateRedirectStrategy" />
+        <property name="defaultFailureUrl" value="/login" />
+    </bean>
+
+    <bean id="queryStringPropagateRedirectStrategy" class="seopays.util.QueryStringPropagateRedirectStrategy" />
+
 </beans>

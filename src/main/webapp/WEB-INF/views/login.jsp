@@ -29,13 +29,13 @@
         <div class="content-header reg_border">
             <h2>
                 <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
-                <spring:message code="label.regnewuser"/>
+                <spring:message code="label.authorization"/>
             </h2>
         </div>
         <%--TODO Create auto breadcrumb--%>
         <ol class="breadcrumb reg_border">
             <li><a href="/">Home</a></li>
-            <li class="active">Registration</li>
+            <li class="active">Authorization</li>
         </ol>
         <!-- Keep all page content within the page-content inset div! -->
         <div class="page-content inset">
@@ -51,7 +51,7 @@
                         </div>
                     </c:if>
 
-                    <form method="POST" action="<c:url value="/j_spring_security_check"/>" role="form">
+                    <form method="POST" action="<c:url value="/${lang}/j_spring_security_check"/>" role="form">
                         <div class="form-group">
                             <label><spring:message code="label.login"/></label>
                             <input type="input" name="j_username" class="form-control" placeholder="<spring:message code="label.login"/>" value="" >

@@ -15,11 +15,9 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/profile*" access="ROLE_USER" />
 
         <form-login login-page="/login" default-target-url="/"
-                    authentication-failure-url="/login?error=true" />
-        <logout logout-url="/logout" logout-success-url="/index" />
+                    authentication-failure-handler-ref="authenticationFailureHandler" />
+        <logout logout-url="/logout" logout-success-url="/" />
 
-        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />-->
-        <!--<remember-me />-->
 
         <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
     </http>
