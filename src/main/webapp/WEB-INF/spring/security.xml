@@ -16,10 +16,8 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-handler-ref="authenticationFailureHandler" />
-        <logout logout-url="/logout" logout-success-url="/index" />
+        <logout logout-url="/logout" logout-success-url="/" />
 
-        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />-->
-        <!--<remember-me />-->
 
         <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
     </http>

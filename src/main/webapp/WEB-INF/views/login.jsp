@@ -29,13 +29,13 @@
         <div class="content-header reg_border">
             <h2>
                 <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
-                <spring:message code="label.regnewuser"/>
+                <spring:message code="label.authorization"/>
             </h2>
         </div>
         <%--TODO Create auto breadcrumb--%>
         <ol class="breadcrumb reg_border">
             <li><a href="/">Home</a></li>
-            <li class="active">Registration</li>
+            <li class="active">Authorization</li>
         </ol>
         <!-- Keep all page content within the page-content inset div! -->
         <div class="page-content inset">
