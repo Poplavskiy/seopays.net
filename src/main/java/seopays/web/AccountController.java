@@ -118,7 +118,7 @@ public class AccountController extends LocaleController {
 
 
     /*TODO Implement international form*/
-
+    /*TODO Save login after wrong auth*/
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getLogin(ModelMap model,
                            HttpServletRequest request,
