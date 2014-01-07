@@ -47,7 +47,6 @@
                     <c:if test="${not empty param.error}">
                         <div class="alert alert-danger">
                             <spring:message code="label.loginerror" />
-                            : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
                         </div>
                     </c:if>
 
